@@ -1,0 +1,145 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{txfonts}
+\usepackage{tkz-euclide}
+\usepackage{listings}
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{gvv}
+\usepackage{lmodern}
+\usepackage{circuitikz}
+\usepackage{tikz}
+\usepackage{graphicx}
+
+\setbeamertemplate{page number in head/foot}[totalframumber]
+
+\usepackage{tcolorbox}
+\tcbuselibrary{minted,breakable,xparse,skins}
+
+\definecolor{bg}{gray}{0.95}
+\lstset{
+    language=C,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    stringstyle=\color{orange},
+    commentstyle=\color{green!60!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    breaklines=true,
+    showstringspaces=false,
+}
+
+%------------------------------------------------------------
+\title{5.4.6}
+\date{September 30,2025}
+\author{EE25BTECH11011 - Navya Banavathu}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Question}
+ Using elementary transformations, find the inverse of the following matrix. 
+\begin{align*}
+    \myvec{10&&-2\\-5&&1}
+\end{align*}
+
+\end{frame}
+
+\begin{frame}{Solution}
+We employ the Gauss--Jordan method,
+\begin{align}
+\left(\begin{array}{cc|cc}
+10 & -2 & 1 & 0 \\
+-5 & 1 & 0 & 1
+\end{array}\right)
+&\xrightarrow{R_1 \leftarrow \tfrac{1}{10}R_1}
+\left(\begin{array}{cc|cc}
+1 & -\tfrac{1}{5} & \tfrac{1}{10} & 0 \\
+-5 & 1 & 0 & 1
+\end{array}\right) \\[1em]
+&\xrightarrow{R_2 \leftarrow R_2+5R_1}
+\left(\begin{array}{cc|cc}
+1 & -\tfrac{1}{5} & \tfrac{1}{10} & 0 \\
+0 & 0 & \tfrac{1}{2} & 1
+\end{array}\right)
+\end{align}
+
+At this stage, the left-hand side is not the identity matrix. \\
+Hence the given matrix is not invertible.
+
+\end{frame}
+
+
+\begin{frame}[fragile]{ Code (C)}
+\begin{block}{Part 1}
+\begin{lstlisting}[language=C, basicstyle=\ttfamily\small, keywordstyle=\color{blue}, frame=single]
+#include <stdio.h>
+
+void compute_inverse(double* inv) {
+    double a = 10, b = -2;
+    double c = -5, d = 1;
+    double det = a*d - b*c;
+
+    if(det == 0) {
+        inv[0] = inv[1] = inv[2] = inv[3] = 0;
+    } else {
+        inv[0] = d/det;   // [0,0]
+        inv[1] = -b/det;  // [0,1]
+        inv[2] = -c/det;  // [1,0]
+        inv[3] = a/det;   // [1,1]
+    }
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Python Code}
+\begin{block}{Part 1}
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\small, keywordstyle=\color{blue}, frame=single]
+import ctypes
+import numpy as np
+import os
+
+# Load the shared library
+if os.name == "nt":
+    lib = ctypes.CDLL("./code9.dll")
+else:
+    lib = ctypes.CDLL("./code9.so")
+
+# Create a 2x2 NumPy array to hold the inverse
+inv_matrix = np.zeros((2,2), dtype=np.double)
+
+# Set the argument type for ctypes
+lib.compute_inverse.argtypes = [ctypes.POINTER(ctypes.c_double)]
+lib.compute_inverse.restype = None
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Python Code}
+\begin{block}{Part 2}
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\small, keywordstyle=\color{blue}, frame=single]
+# Call the C function with pointer to NumPy array
+lib.compute_inverse(inv_matrix.ctypes.data_as(ctypes.POINTER(ctypes.c_double)))
+
+# Check if matrix is invertible
+if np.all(inv_matrix == 0):
+    print("Matrix is not invertible.")
+else:
+    print("Matrix is invertible.")
+    print("Inverse matrix:\n", inv_matrix)
+
+
+\end{lstlisting}
+\end{block}
+\end{frame}
+\end{document}
+

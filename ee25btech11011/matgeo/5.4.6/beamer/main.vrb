@@ -1,0 +1,16 @@
+\frametitle{Python Code}
+\begin{block}{Part 2}
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\small, keywordstyle=\color{blue}, frame=single]
+# Call the C function with pointer to NumPy array
+lib.compute_inverse(inv_matrix.ctypes.data_as(ctypes.POINTER(ctypes.c_double)))
+
+# Check if matrix is invertible
+if np.all(inv_matrix == 0):
+    print("Matrix is not invertible.")
+else:
+    print("Matrix is invertible.")
+    print("Inverse matrix:\n", inv_matrix)
+
+
+\end{lstlisting}
+\end{block}

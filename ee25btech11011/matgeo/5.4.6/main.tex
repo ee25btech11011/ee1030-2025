@@ -1,0 +1,83 @@
+\let\negmedspace\undefined
+\let\negthickspace\undefined
+\documentclass[journal]{IEEEtran}
+\usepackage[a5paper, margin=10mm, onecolumn]{geometry}
+%\usepackage{lmodern} % Ensure lmodern is loaded for pdflatex
+\usepackage{tfrupee} % Include tfrupee package
+
+\setlength{\headheight}{1cm} % Set the height of the header box
+\setlength{\headsep}{0mm}     % Set the distance between the header box and the top of the text
+
+\usepackage{gvv-book}
+\usepackage{gvv}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{txfonts}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{gensymb}
+\usepackage{comment}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage{tkz-euclide} 
+\usepackage{listings}
+% \usepackage{gvv}                                        
+\def\inputGnumericTable{}                                 
+\usepackage[latin1]{inputenc}                                
+\usepackage{color}                                            
+\usepackage{array}                                            
+\usepackage{longtable}                                       
+\usepackage{calc}                                             
+\usepackage{multirow}                                         
+\usepackage{hhline}                                           
+\usepackage{ifthen}                                           
+\usepackage{lscape}
+\begin{document}
+
+\bibliographystyle{IEEEtran}
+\vspace{3cm}
+
+\title{5.4.6}
+\author{EE25BTECH11011 - Navya}
+% \maketitle
+% \newpage
+% \bigskip
+{\let\newpage\relax\maketitle}
+
+\renewcommand{\thefigure}{\theenumi}
+\renewcommand{\thetable}{\theenumi}
+\setlength{\intextsep}{10pt} % Space between text and floats
+\textbf{Question}:\\
+Using elementary transformations, find the inverse of the following matrix. 
+\begin{align*}
+    \myvec{10&&-2\\-5&&1}
+\end{align*}
+
+\textbf{Solution}:\\ 
+We employ the Gauss--Jordan method,
+\begin{align}
+\left(\begin{array}{cc|cc}
+10 & -2 & 1 & 0 \\
+-5 & 1 & 0 & 1
+\end{array}\right)
+&\xrightarrow{R_1 \leftarrow \tfrac{1}{10}R_1}
+\left(\begin{array}{cc|cc}
+1 & -\tfrac{1}{5} & \tfrac{1}{10} & 0 \\
+-5 & 1 & 0 & 1
+\end{array}\right) \\[1em]
+&\xrightarrow{R_2 \leftarrow R_2+5R_1}
+\left(\begin{array}{cc|cc}
+1 & -\tfrac{1}{5} & \tfrac{1}{10} & 0 \\
+0 & 0 & \tfrac{1}{2} & 1
+\end{array}\right)
+\end{align}
+
+At this stage, the left-hand side is not the identity matrix. \\
+Hence the given matrix is not invertible.
+
+
+\end{document}
