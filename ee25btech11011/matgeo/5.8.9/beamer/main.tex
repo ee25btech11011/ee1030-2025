@@ -1,0 +1,222 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{txfonts}
+\usepackage{tkz-euclide}
+\usepackage{listings}
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{gvv}
+\usepackage{lmodern}
+\usepackage{circuitikz}
+\usepackage{tikz}
+\usepackage{graphicx}
+
+\setbeamertemplate{page number in head/foot}[totalframumber]
+
+\usepackage{tcolorbox}
+\tcbuselibrary{minted,breakable,xparse,skins}
+
+\definecolor{bg}{gray}{0.95}
+\lstset{
+    language=C,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    stringstyle=\color{orange},
+    commentstyle=\color{green!60!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    breaklines=true,
+    showstringspaces=false,
+}
+
+%------------------------------------------------------------
+\title{5.8.9}
+\date{October 3,2025}
+\author{EE25BTECH11011 - Navya Banavathu}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Question}
+ The area of a rectangle gets reduced by $9$ square units, if its length is reduced by $5$ units and breadth is increased by $3$ units. If we increase the length by $3$ units and the breadth by $2$ units, the area increases by $67$ square units. Find the dimensions of the rectangle
+\end{frame}
+
+\begin{frame}{Solution}
+Let the original length and breadth of the rectangle be $l$ and $b$, respectively.
+
+From the problem:
+\begin{align}
+(l - 5)(b + 3) &= lb - 9  \\
+\Rightarrow 3l - 5b &= 6 
+\end{align}
+\begin{align}
+(l + 3)(b + 2) &= lb + 67 \\
+\Rightarrow 2l + 3b &= 61 
+\end{align}
+
+Equations (2) and (4) form the system:
+\begin{align}
+\begin{pmatrix}
+3 & -5 \\
+2 & 3 \\
+\end{pmatrix}
+\begin{pmatrix}
+l \\
+b \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+6 \\
+61 \\
+\end{pmatrix}
+\end{align}
+
+\end{frame}
+
+
+
+\begin{frame}{Solution}
+
+With the augmented matrix followed by row reduction:
+
+\begin{align}
+\left(
+\begin{array}{cc|c}
+3 & -5 & 6 \\
+2 & 3 & 61 \\
+\end{array}
+\right)
+\overset{R_2 \leftarrow R_2 - \frac{2}{3}R_1}{\longrightarrow}
+\left(
+\begin{array}{cc|c}
+3 & -5 & 6 \\
+0 & \frac{19}{3} & 57 \\
+\end{array}
+\right)
+\end{align}
+
+\begin{align}
+\overset{R_2 \leftarrow \frac{3}{19}R_2}{\longrightarrow}
+\left(
+\begin{array}{cc|c}
+3 & -5 & 6 \\
+0 & 1 & \frac{171}{19} \\
+\end{array}
+\right)
+\overset{R_1 \leftarrow R_1 + 5R_2}{\longrightarrow}
+\left(
+\begin{array}{cc|c}
+3 & 0 & \frac{969}{19} \\
+0 & 1 & \frac{171}{19} \\
+\end{array}
+\right)
+\end{align}
+
+\begin{align}
+\overset{R_1 \leftarrow \frac{1}{3}R_1}{\longrightarrow}
+\left(
+\begin{array}{cc|c}
+1 & 0 & \frac{323}{19} \\
+0 & 1 & \frac{171}{19} \\
+\end{array}
+\right)
+\end{align}
+\end{frame}
+
+\begin{frame}{Solution}
+\begin{align}
+\therefore
+\begin{pmatrix}
+l \\
+b \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+\frac{323}{19} \\
+\frac{171}{19} \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+17 \\
+9 \\
+\end{pmatrix}
+\end{align}
+
+The dimensions of the rectangle are:
+\begin{center}
+\boxed{\text{Length } = 17 \text{ units}, \quad \text{Breadth } = 9 \text{ units}}
+\end{center}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{ Code (C)}
+\begin{block}{Part 1}
+\begin{lstlisting}[language=C, basicstyle=\ttfamily\small, keywordstyle=\color{blue}, frame=single]
+#include <stdio.h>
+void solve(int* l, int* b) {
+    int i, j;
+    for (i = 0; i <= 100; i++) {
+        for (j = 0; j <= 100; j++) {
+            if ((3 * i - 5 * j == 6) && (2 * i + 3 * j == 61)) {
+                printf("Found solution: l = %d, b = %d\n", i, j);
+                *l = i;
+                *b = j;
+                return;
+            }
+        }
+    }
+    printf("No solution found.\n");
+    *l = -1;
+    *b = -1;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Python Code}
+\begin{block}{Part 1}
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\small, keywordstyle=\color{blue}, frame=single]
+import ctypes
+
+# Load DLL (adjust filename/path as needed)
+lib = ctypes.CDLL('./cod10.dll')
+
+# Declare function argument and return types
+lib.solve.argtypes = [ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int)]
+lib.solve.restype = None
+
+# Prepare ctypes int variables to hold results
+l = ctypes.c_int()
+b = ctypes.c_int()
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Python Code}
+\begin{block}{Part 2}
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\small, keywordstyle=\color{blue}, frame=single]
+# Call the solve function from the DLL
+lib.solve(ctypes.byref(l), ctypes.byref(b))
+
+length = l.value
+breadth = b.value
+
+if length == -1 or breadth == -1:
+    print("No valid solution found.")
+else:
+    print(f"Length = {length}, Breadth = {breadth}")
+\end{lstlisting}
+\end{block}
+\end{frame}
+\end{document}
+
+

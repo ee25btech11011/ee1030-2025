@@ -1,0 +1,15 @@
+\frametitle{Python Code}
+\begin{block}{Part 2}
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\small, keywordstyle=\color{blue}, frame=single]
+# Call the solve function from the DLL
+lib.solve(ctypes.byref(l), ctypes.byref(b))
+
+length = l.value
+breadth = b.value
+
+if length == -1 or breadth == -1:
+    print("No valid solution found.")
+else:
+    print(f"Length = {length}, Breadth = {breadth}")
+\end{lstlisting}
+\end{block}
