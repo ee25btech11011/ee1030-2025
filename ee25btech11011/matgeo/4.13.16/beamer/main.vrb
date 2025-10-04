@@ -1,0 +1,16 @@
+\frametitle{Python Code: Plotting}
+\begin{block}{Part 4}
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\small, keywordstyle=\color{blue}, frame=single]
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title(f'Lines and Common Perpendicular for p = {p}')
+plt.grid(True)
+plt.legend()
+plt.axhline(0, color='black', linewidth=0.8)
+plt.axvline(0, color='black', linewidth=0.8)
+
+# Step 5: Save figure
+plt.savefig("fig11.png", dpi=300)
+plt.show()
+\end{lstlisting}
+\end{block}
