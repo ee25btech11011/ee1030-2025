@@ -1,0 +1,19 @@
+\frametitle{Python Code: Plotting}
+\begin{block}{Part 5}
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\small, keywordstyle=\color{blue}, frame=single]
+plt.scatter(h, k, color='black', s=50, label='Center (1,-1)')
+plt.text(h, k, '  (1, -1)', fontsize=10, color='black', va='center', ha='left')
+plt.title("Circle with Given Diameter Lines")
+plt.xlabel("x-axis")
+plt.ylabel("y-axis")
+plt.grid(True)
+plt.legend()
+plt.axis('equal')
+
+# Save figure as fig13.png
+plt.savefig("fig13.png", dpi=300)
+
+# Show the figure
+plt.show()
+\end{lstlisting}
+\end{block}
