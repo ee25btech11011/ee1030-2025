@@ -81,39 +81,55 @@ If both lines are perpendicular to a common line with normal vector $\vec{m}$, t
 \vec{n_2}^T \vec{m} &= 0.
 \end{align}
 
-This implies $\vec{m}$ lies in the null space of the matrix
+Hence, the two equations can be written together as
 \begin{align}
-N &= \begin{pmatrix}
-\vec{n_1}^T \\
-\vec{n_2}^T
-\end{pmatrix}
-= \begin{pmatrix}
+\begin{pmatrix}
 p(p^2+1) & -1 \\
 (p^2+1)^2 & p^2+1
+\end{pmatrix}
+\vec{m} &= \vec{0}.
+\end{align}
+
+For a non-trivial $\vec{m}$ to exist, the two rows must be linearly dependent.
+\begin{align}
+\exists\, k \in \mathbb{R} \text{ such that} \quad
+\begin{pmatrix}
+(p^2+1)^2 & p^2+1
+\end{pmatrix}
+&= k
+\begin{pmatrix}
+p(p^2+1) & -1
 \end{pmatrix}.
 \end{align}
 
-For a non-trivial solution $\vec{m} \neq 0$ to exist,
+Equating components, we get
 \begin{align}
-\det(N) = 0.
+(p^2+1)^2 &= k\,p(p^2+1),\\
+p^2+1 &= -k
 \end{align}
 
-Now,
+From (9), we have
 \begin{align}
-\det &= p(p^2+1)(p^2+1) - (-1)\big((p^2+1)^2\big) \\
-&= p(p^2+1)^2 + (p^2+1)^2 \\
-&= (p+1)(p^2+1)^2
+k = -(p^2+1)
+\end{align}
+Substituting into (8)
+\begin{align}
+(p^2+1)^2 &= -p(p^2+1)(p^2+1).
 \end{align}
 
-Thus, the condition becomes
-\begin{align}
-(p+1)(p^2+1)^2=0 \quad\Longrightarrow\quad p=-1 \quad\text{or}\quad p^2+1=0\end{align}
 
-Since $p^2+1=0$ gives nonreal $p$, the only real solution is
+If $p^2+1\neq 0$ dividing both sides by $(p^2+1)^2$ gives
 \begin{align}
-    \boxed{p=-1}
+1 &= -p \quad \Longrightarrow \quad p = -1.
 \end{align}
-Hence there is exactly one real value of $p$.
+
+If  $p^2+1 = 0$, then $p = \pm i$, which are non-real.
+
+Hence, both lines are perpendicular to a common line for exactly one real value of  p.
+\begin{align}
+\boxed {p = -1}
+\end{align}
+
 \begin{figure}[h!]
     \centering
 \includegraphics[width=0.8\textwidth]{figs/fig11.png}
