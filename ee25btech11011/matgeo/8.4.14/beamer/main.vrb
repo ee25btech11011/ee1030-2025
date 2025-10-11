@@ -1,0 +1,18 @@
+\frametitle{Python Code: Plotting}
+\begin{block}{Part 4}
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\small, keywordstyle=\color{blue}, frame=single]
+plt.axhline(0, color='black', linewidth=0.5)
+plt.axvline(0, color='black', linewidth=0.5)
+
+plt.title('Ellipse and Parabola with Latus Rectum')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend()
+plt.grid(True)
+plt.axis('equal')
+
+# Save the plot
+plt.savefig('fig14.png', dpi=300)
+plt.show()
+\end{lstlisting}
+\end{block}
