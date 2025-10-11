@@ -85,49 +85,116 @@ p(p^2+1) & -1 \\
 \vec{m} &= \vec{0}.
 \end{align}
 
-For a non-trivial $\vec{m}$ to exist, the two rows must be linearly dependent.
+Writing the system as an augmented matrix:
 \begin{align}
-\exists\, k \in \mathbb{R} \text{ such that} \quad
-\begin{pmatrix}
-(p^2+1)^2 & p^2+1
-\end{pmatrix}
-&= k
-\begin{pmatrix}
-p(p^2+1) & -1
-\end{pmatrix}.
+\left[
+\begin{array}{cc|c}
+p(p^2 + 1) & -1 & 0 \\
+(p^2 + 1)^2 & p^2 + 1 & 0
+\end{array}
+\right]
 \end{align}
 
-Equating components, we get
+\end{frame}
+
+\begin{frame}{Solution}
+Perform row operations to reduce to RREF:
 \begin{align}
-(p^2+1)^2 &= k\,p(p^2+1),\\
-p^2+1 &= -k
+& \left[
+\begin{array}{cc|c}
+p(p^2 + 1) & -1 & 0 \\
+(p^2 + 1)^2 & p^2 + 1 & 0
+\end{array}
+\right]
+\xrightarrow[R_1 \to \frac{1}{p(p^2+1)} R_1]{\quad}
+\left[
+\begin{array}{cc|c}
+1 & -\frac{1}{p(p^2+1)} & 0 \\
+(p^2 + 1)^2 & p^2 + 1 & 0
+\end{array}
+\right] \nonumber\\
+\end{align}
+\begin{align}
+& \xrightarrow[R_2 \to R_2 - (p^2 + 1)^2 R_1]{\quad} 
+ \quad
+\left[
+\begin{array}{cc|c}
+1 & -\frac{1}{p(p^2+1)} & 0 \\
+0 & (p^2 + 1) + \frac{(p^2 + 1)^2}{p(p^2+1)} & 0
+\end{array}
+\right] \nonumber\\
+\end{align}
+\begin{align}
+&=
+\left[
+\begin{array}{cc|c}
+1 & -\frac{1}{p(p^2+1)} & 0 \\
+0 & (p^2 + 1)\left(1 + \frac{1}{p}\right) & 0
+\end{array}
+\right] \nonumber\\
+\end{align}
+
+\end{frame}
+
+
+\begin{frame}{Solution}
+\begin{align}
+& \xrightarrow[R_2 \to \frac{1}{(p^2 + 1)\frac{p+1}{p}} R_2]{\quad} \quad
+\left[
+\begin{array}{cc|c}
+1 & -\frac{1}{p(p^2+1)} & 0 \\
+0 & 1 & 0
+\end{array}
+\right] 
+ \xrightarrow[R_1 \to R_1 + \frac{1}{p(p^2+1)} R_2]{\quad} \quad
+\left[
+\begin{array}{cc|c}
+1 & 0 & 0 \\
+0 & 1 & 0
+\end{array}
+\right]
+\end{align}
+
+ For a non-trivial solution $\vec{m} \neq \vec{0}$, the system must be \textbf{rank deficient}, meaning the second row before normalization must be zero:
+ 
+\begin{align}
+(p^2 + 1) \frac{p + 1}{p} = 0.
 \end{align}
 \end{frame}
 
 \begin{frame}{Solution}
-From (9), we have
+ Solve for $p$:
 \begin{align}
-k = -(p^2+1)
+p^2 + 1 = 0 \implies p = \pm i \quad \text{(non-real, discard)},
 \end{align}
-Substituting into (8)
+
+or
 \begin{align}
-(p^2+1)^2 &= -p(p^2+1)(p^2+1).
+p + 1 = 0 \implies p = -1.
+\end{align}
+
+ Check special case $p = 0$:
+
+If $p = 0$, the matrix becomes
+\begin{align}
+\begin{pmatrix}
+0 & -1 \\
+1 & 1
+\end{pmatrix}
+\end{align}
+
+which has full rank, so only the trivial solution exists.
+
+ The only real value of $p$ such that both lines are perpendicular to a common line is
+\begin{align}
+\boxed{p = -1}
 \end{align}
 
 
-If $p^2+1\neq 0$ dividing both sides by $(p^2+1)^2$ gives
-\begin{align}
-1 &= -p \quad \Longrightarrow \quad p = -1.
-\end{align}
 
-If  $p^2+1 = 0$, then $p = \pm i$, which are non-real.
-
-Hence, both lines are perpendicular to a common line for exactly one real value of  p.
-\begin{align}
-\boxed {p = -1}
-\end{align}
 
 \end{frame}
+
 
 \begin{frame}[fragile]{ Code (C)}
 \begin{block}{Part 1}
