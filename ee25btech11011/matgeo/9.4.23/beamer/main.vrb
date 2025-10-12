@@ -1,0 +1,18 @@
+\frametitle{Python Code: Plotting}
+\begin{block}{Part 4}
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\small, keywordstyle=\color{blue}, frame=single]
+plt.text(x1 + offset_x, 0 + offset_y, f'x1({x1:.2f})', ha='left', va='bottom', color='red')
+plt.text(x2 + offset_x, 0 + offset_y, f'x2({x2:.2f})', ha='left', va='bottom', color='red')
+
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Graphical solution of 6x^2 - x - 2 = 0')
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+
+# Save figure
+plt.savefig('fig15.png', dpi=300)
+plt.show()
+\end{lstlisting}
+\end{block}
